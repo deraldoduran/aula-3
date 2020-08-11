@@ -11,3 +11,16 @@ SELECT * FROM empregado
 WHERE numdepto IN (SELECT numdepto
                     FROM departamento
                     WHERE nome = 'desenvolvimento');
+                    
+--quanto a pessoa ganha a mais
+
+SELECT matricula, nome, numdepto, salario -(
+SELECT AVG(salario) FROM empregado) AS ganho_a_mais FROM empregado
+WHERE salrario > (SELECT AVG (salario) FROM empregado);
+
+-- pega o maior salario do departamento 1 e usa como referência pra saber dos outros empregados quem ganha mais
+
+SELECT * FROM empregado WHERE salario >= 
+SOME (SELECT salario FROM empregado
+WHERE numdepto = 1)
+
