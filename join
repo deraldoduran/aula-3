@@ -18,9 +18,17 @@ SELECT matricula, nome, numdepto, salario -(
 SELECT AVG(salario) FROM empregado) AS ganho_a_mais FROM empregado
 WHERE salrario > (SELECT AVG (salario) FROM empregado);
 
--- pega o maior salario do departamento 1 e usa como referência pra saber dos outros empregados quem ganha mais
+-- pega o maior salario do departamento 1 e usa como referência pra saber dos outros empregados quem ganha mais. USAR SOME OU ANY É IGUAL
 
 SELECT * FROM empregado WHERE salario >= 
 SOME (SELECT salario FROM empregado
 WHERE numdepto = 1)
 
+SELECT * FROM empregado WHERE salario >= 
+ANY (SELECT salario FROM empregado
+WHERE numdepto = 1)
+
+-- com o ALL ele seleciona quem ganha a mais do que todos o do departamento 1
+SELECT * FROM empregado WHERE salario >= 
+ALL (SELECT salario FROM empregado
+WHERE numdepto = 1)
