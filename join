@@ -1,0 +1,2 @@
+SELECT E.nome, D.nome FROM empregado.E, departamento.D
+WHERE E.numdepto = D.numdepto;
