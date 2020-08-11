@@ -32,3 +32,19 @@ WHERE numdepto = 1)
 SELECT * FROM empregado WHERE salario >= 
 ALL (SELECT salario FROM empregado
 WHERE numdepto = 1)
+
+-- uso do EXISTS OU NOT EXISTS
+SELECT * FROM empregado E  WHERE EXISTS(SELECT D.numdepto FROM departamento D
+WHERE D.numdepto = E.numdepto AND D.nome = 'TI');
+
+--criar visão(as visões não ocupam espaço)
+CREATE VIEW visao01 (nome_dpto, matricula, nome_empr, salario)
+AS
+SELECT E.nome, D.nome FROM empregado.E, departamento.D
+WHERE E.numdepto = D.numdepto
+ORDER BY E.salario DESC, D.nome;
+
+-- quando quiser consultar a visão executa
+SELECT * FROM visao01;
+
+SELECT nome_empr FROM visao01;
