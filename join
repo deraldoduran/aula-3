@@ -6,7 +6,8 @@ ORDER BY E.salario DESC, D.nome;
 ```sql
 SELECT E.nome, D.nome FROM departamento.D LEFT OUTER JOIN empregado.E
 ON D.numdepto = E.numdepto;
-´´´
+
+```
 ```sql
 -- consultas aninhadas
 
