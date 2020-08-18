@@ -1,59 +1,74 @@
+```sql
 SELECT E.nome, D.nome FROM empregado.E, departamento.D
 WHERE E.numdepto = D.numdepto
 ORDER BY E.salario DESC, D.nome;
-
+´´´
+```sql
 SELECT E.nome, D.nome FROM departamento.D LEFT OUTER JOIN empregado.E
 ON D.numdepto = E.numdepto;
-
+´´´
+```sql
 -- consultas aninhadas
 
 SELECT * FROM empregado
 WHERE numdepto IN (SELECT numdepto
                     FROM departamento
                     WHERE nome = 'desenvolvimento');
-                    
+  ```
+      ```sql
 --quanto a pessoa ganha a mais
 
 SELECT matricula, nome, numdepto, salario -(
 SELECT AVG(salario) FROM empregado) AS ganho_a_mais FROM empregado
 WHERE salrario > (SELECT AVG (salario) FROM empregado);
-
+```
+```sql
 -- pega o maior salario do departamento 1 e usa como referência pra saber dos outros empregados quem ganha mais. USAR SOME OU ANY É IGUAL
 
 SELECT * FROM empregado WHERE salario >= 
 SOME (SELECT salario FROM empregado
 WHERE numdepto = 1)
-
+```
+```sql
 SELECT * FROM empregado WHERE salario >= 
 ANY (SELECT salario FROM empregado
 WHERE numdepto = 1)
-
+```
+```sql
 -- com o ALL ele seleciona quem ganha a mais do que todos o do departamento 1
 SELECT * FROM empregado WHERE salario >= 
 ALL (SELECT salario FROM empregado
 WHERE numdepto = 1)
-
+```
+```sql
 -- uso do EXISTS OU NOT EXISTS
 SELECT * FROM empregado E  WHERE EXISTS(SELECT D.numdepto FROM departamento D
 WHERE D.numdepto = E.numdepto AND D.nome = 'TI');
-
+```
+```sql
 --criar visão(as visões não ocupam espaço)
 CREATE VIEW visao01 (nome_dpto, matricula, nome_empr, salario)
 AS
 SELECT E.nome, D.nome FROM empregado.E, departamento.D
 WHERE E.numdepto = D.numdepto
 ORDER BY E.salario DESC, D.nome;
-
+```
+```sql
 -- quando quiser consultar a visão executa
 SELECT * FROM visao01;
-
+```
+```sql
 SELECT nome_empr FROM visao01;
-
+```
+```sql
 --SÓ LISTA OS 5 PRIMEIROS
 SELECT * FROM visao01 LIMITS 5;
-
+```
+```sql
 --LISTA OS SUBSEQUENTES À PARTIR DO 6 E LIMITA A 5 REGISTROS
 SELECT * FROM visao01 OFFSET 5 LIMITS 5;
-
+```
+```sql
 --LISTA À PARTIR DO SEXTO ATÉ O FINAL
 SELECT * FROM visao01 OFFSET 5;
+```
