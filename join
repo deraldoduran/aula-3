@@ -15,8 +15,8 @@ SELECT * FROM empregado
 WHERE numdepto IN (SELECT numdepto
                     FROM departamento
                     WHERE nome = 'desenvolvimento');
-  ```
-      ```sql
+```
+```sql
 --quanto a pessoa ganha a mais
 
 SELECT matricula, nome, numdepto, salario -(
